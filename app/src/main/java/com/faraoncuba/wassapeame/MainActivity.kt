@@ -118,20 +118,29 @@ class MainActivity : AppCompatActivity() {
             }
 
             val encodedMsg = URLEncoder.encode(message, "UTF-8")
-            // Intent directo a la app WhatsApp
+            // Intent directo a la app WhatsApp; intentar WhatsApp normal, luego WhatsApp Business, luego web
             val appIntent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse("whatsapp://send?phone=$fullNumber&text=$encodedMsg")
-            ).apply {
-                setPackage("com.whatsapp")
-            }
+            ).apply { setPackage("com.whatsapp") }
 
             try {
                 startActivity(appIntent)
             } catch (e: ActivityNotFoundException) {
-                // fallback: abrir en navegador usando la API web de WhatsApp
-                val webUrl = "https://api.whatsapp.com/send?phone=$fullNumber&text=$encodedMsg"
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)))
+                // Intent para WhatsApp Business
+                try {
+                    val businessIntent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("whatsapp://send?phone=$fullNumber&text=$encodedMsg")
+                    ).apply { setPackage("com.whatsapp.w4b") }
+                    startActivity(businessIntent)
+                } catch (e2: ActivityNotFoundException) {
+                    // fallback: abrir en navegador usando la API web de WhatsApp
+                    val webUrl = "https://api.whatsapp.com/send?phone=$fullNumber&text=$encodedMsg"
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)))
+                } catch (e2: Exception) {
+                    Toast.makeText(this, "Error: ${e2.localizedMessage}", Toast.LENGTH_LONG).show()
+                }
             } catch (e: Exception) {
                 Toast.makeText(this, "Error: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
             }
