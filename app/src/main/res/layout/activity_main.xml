@@ -15,7 +15,7 @@
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Número de móvil (sin espacios)"
+        android:hint="@string/hint_phone_number"
         android:inputType="phone"
         android:maxLines="1"
         android:layout_marginTop="8dp" />
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:hint="Escribe tu mensaje..."
+        android:hint="@string/hint_message"
         android:inputType="textMultiLine"
         android:gravity="top"
         android:layout_marginTop="8dp" />
@@ -34,7 +34,7 @@
         android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enviar por WhatsApp"
+        android:text="@string/action_send_whatsapp"
         android:layout_marginTop="12dp" />
 
 </LinearLayout>
