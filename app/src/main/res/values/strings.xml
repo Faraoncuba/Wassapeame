@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wassapeame</string>
+    <string name="hint_phone_number">Número de móvil (sin espacios)</string>
+    <string name="hint_message">Escribe tu mensaje...</string>
+    <string name="action_send_whatsapp">Enviar por WhatsApp</string>
+</resources>
